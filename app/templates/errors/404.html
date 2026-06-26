@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}404{% endblock %}
+{% block content %}
+<div class="empty"><div class="big">404</div>
+  <h1>Page introuvable</h1>
+  <p class="subtitle"><a href="{{ url_for('dashboard.index') }}">Retour au tableau de bord</a></p>
+</div>
+{% endblock %}

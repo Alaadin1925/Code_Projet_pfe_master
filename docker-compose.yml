@@ -1,0 +1,49 @@
+# ── La Poste Tunisienne — National Reporting stack ───────────────────────────
+# Two services: SQL Server (persistent volume) + the Flask app on :8000.
+# Values come from .env (copy .env.example → .env first).
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: lp_sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+      MSSQL_PID: Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql          # persistent database storage
+    restart: unless-stopped
+
+  app:
+    build: .
+    container_name: lp_app
+    env_file:
+      - .env
+    environment:
+      # Override DB host to the compose service name regardless of .env value.
+      DATABASE_URL: "mssql+pyodbc://sa:${MSSQL_SA_PASSWORD}@db:1433/${MSSQL_DB:-lp_national}?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes&Encrypt=yes"
+      APP_PORT: "8000"
+      START_BACKGROUND_WORKER: "true"
+      # Set AUTO_IMPORT=true to import the mounted Excel on first boot.
+      AUTO_IMPORT: "${AUTO_IMPORT:-false}"
+      # In-container path: file lives in ./data (mounted at /data). Customize the
+      # filename with NATIONAL_XLSX_FILE in .env; the host path var is NOT reused
+      # here so a local Windows path can't leak into the container.
+      NATIONAL_XLSX_PATH: "/data/${NATIONAL_XLSX_FILE:-depot2026_nettoye.xlsx}"
+      IMPORT_XLS_PATH: "/data/${IMPORT_XLS_FILE:-import.xls}"
+    ports:
+      # Host port is configurable to avoid conflicts: set APP_HOST_PORT in .env.
+      # The container always listens on 8000 internally.
+      - "${APP_HOST_PORT:-8000}:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./reports:/app/reports             # generated HTML reports
+      - ./uploads:/app/uploads             # uploaded files
+      - ./data:/data:ro                    # put the national .xlsx here (read-only)
+    restart: unless-stopped
+
+volumes:
+  mssql_data:

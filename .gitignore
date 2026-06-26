@@ -1,4 +1,11 @@
-# Python
+# ── Secrets / environment ────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ── Python ───────────────────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *.pyo
@@ -9,51 +16,48 @@ dist/
 build/
 .eggs/
 
-# Virtual environments
+# ── Virtual environments ─────────────────────────────────────────────────────
+.venv/
 venv/
 env/
-.venv/
-.env/
+ENV/
 
-# Flask / SQLite
-instance/
+# ── Local databases ──────────────────────────────────────────────────────────
 *.db
+*.sqlite
 *.sqlite3
+local_dev.db
+instance/
 
-# Données sensibles (fichiers Excel volumineux)
+# ── Generated reports / uploads / temp ───────────────────────────────────────
+reports/
+uploads/
+outputs/
+tmp/
+*.tmp
+*.log
+
+# ── Data files (national Excel is mounted, not committed) ─────────────────────
 *.xlsx
 *.xls
 *.csv
 
-# Rapports générés (HTML interactifs + captures)
-powerbi_webapp/reports/
-powerbi_automate_email/report_*.html
-powerbi_automate_email/report_*.png
-powerbi_automate_email/national_live.html
-powerbi_automate_email/powerbi_session.json
-
-# Browser profile Power BI (contient des cookies/sessions)
-powerbi_profile/
-**/powerbi_profile/
-
-# Logs TensorBoard / PyTorch Lightning
+# ── Tooling / IDE / OS ───────────────────────────────────────────────────────
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 lightning_logs/
-
-# Logs
-*.log
-
-# IDE
-.vscode/
 .idea/
+.vscode/
 *.swp
 *.swo
-
-# OS
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Secrets
-.env
-*.pem
-*.key
+# ── Legacy Power BI browser profile / node ───────────────────────────────────
+powerbi_profile/
+**/powerbi_profile/
+node_modules/

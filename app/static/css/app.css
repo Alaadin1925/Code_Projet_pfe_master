@@ -1,0 +1,98 @@
+:root{
+  --navy:#0B2A6F; --navy-2:#13357f; --yellow:#F4C20D; --bg:#F2F5FB;
+  --card:#ffffff; --ink:#1c2a44; --muted:#5b6b8c; --line:#E1E8F5;
+  --green:#2ecc71; --red:#e74c3c; --orange:#f39c12;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Segoe UI",Roboto,Arial,sans-serif;font-size:14px;line-height:1.45}
+a{color:var(--navy);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Top bar ─────────────────────────────────────────────── */
+.topbar{display:flex;justify-content:space-between;align-items:center;
+  background:var(--navy);color:#fff;padding:10px 22px;flex-wrap:wrap;gap:10px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{background:var(--yellow);color:var(--navy);font-weight:800;
+  border-radius:8px;padding:4px 9px;letter-spacing:.5px}
+.brand-text{font-size:15px}
+.nav{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.nav a{color:#dce6ff;font-weight:600}
+.nav a:hover{color:#fff;text-decoration:none}
+.nav .logout{color:var(--yellow)}
+
+/* ── Layout ──────────────────────────────────────────────── */
+.container{max-width:1180px;margin:0 auto;padding:22px}
+h1{font-size:22px;margin:6px 0 2px}
+h2{font-size:17px;color:var(--navy);margin:26px 0 10px}
+.subtitle{color:var(--muted);margin:0 0 18px}
+
+/* ── Flash ───────────────────────────────────────────────── */
+.flashes{margin-bottom:16px;display:flex;flex-direction:column;gap:8px}
+.flash{padding:10px 14px;border-radius:8px;font-weight:600}
+.flash-success{background:#e7f8ee;color:#1c7a45;border:1px solid #b6e8cb}
+.flash-error{background:#fdeaea;color:#a6271c;border:1px solid #f4c0bb}
+.flash-warning{background:#fff7e0;color:#8a6400;border:1px solid #f3dd9a}
+
+/* ── KPI cards ───────────────────────────────────────────── */
+.kpi-grid{display:flex;flex-wrap:wrap;gap:14px;margin:8px 0 6px}
+.kpi{flex:1 1 165px;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;padding:16px 18px;box-shadow:0 1px 3px rgba(11,42,111,.06)}
+.kpi .label{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.kpi .value{font-size:25px;font-weight:800;color:var(--navy);margin-top:6px}
+.kpi .sub{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* ── Cards / panels ──────────────────────────────────────── */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin-top:16px;box-shadow:0 1px 3px rgba(11,42,111,.05)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:820px){.grid-2{grid-template-columns:1fr}}
+
+/* ── Bar lists (lightweight charts, no JS libs) ──────────── */
+.barlist{display:flex;flex-direction:column;gap:7px;margin-top:6px}
+.bar-row{display:grid;grid-template-columns:140px 1fr 64px;align-items:center;gap:10px}
+.bar-row .name{font-size:13px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{background:#eef2fb;border-radius:6px;height:16px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--navy),var(--navy-2));border-radius:6px}
+.bar-fill.green{background:var(--green)} .bar-fill.red{background:var(--red)}
+.bar-fill.orange{background:var(--orange)} .bar-fill.yellow{background:var(--yellow)}
+.bar-row .val{font-size:12px;text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* ── Tables ──────────────────────────────────────────────── */
+table.data{border-collapse:collapse;width:100%;margin-top:6px}
+table.data th{background:var(--navy);color:#fff;text-align:left;padding:8px 12px;font-size:13px}
+table.data td{padding:7px 12px;border-bottom:1px solid #eef2fa;font-size:13px}
+table.data tr:nth-child(even) td{background:#f8fafe}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:700}
+.badge.ok{background:#e7f8ee;color:#1c7a45}.badge.run{background:#fff7e0;color:#8a6400}
+.badge.fail{background:#fdeaea;color:#a6271c}.badge.pend{background:#eef2fb;color:#3a4a72}
+
+/* ── Forms / buttons ─────────────────────────────────────── */
+.btn{display:inline-block;background:var(--navy);color:#fff;border:none;border-radius:8px;
+  padding:10px 18px;font-weight:700;cursor:pointer;font-size:14px}
+.btn:hover{background:var(--navy-2);text-decoration:none}
+.btn.secondary{background:#eef2fb;color:var(--navy)}
+input[type=text],input[type=password],select{width:100%;padding:10px 12px;border:1px solid var(--line);
+  border-radius:8px;font-size:14px;background:#fff}
+label{font-weight:600;font-size:13px;color:var(--ink)}
+.field{margin-bottom:14px}
+.checks{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.checks label{display:flex;align-items:center;gap:6px;background:#f4f7fd;border:1px solid var(--line);
+  border-radius:8px;padding:7px 11px;font-weight:600}
+
+/* ── Login ───────────────────────────────────────────────── */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--navy),#06163b)}
+.login-card{background:#fff;border-radius:16px;padding:32px;width:360px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.login-card .logo{background:var(--yellow);color:var(--navy);font-weight:800;border-radius:10px;
+  width:54px;height:54px;display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 14px}
+.login-card h1{text-align:center;font-size:19px;margin:0 0 4px}
+.login-card p{text-align:center;color:var(--muted);margin:0 0 20px;font-size:13px}
+
+/* ── Clustering ──────────────────────────────────────────── */
+.cluster-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+.metric-pills{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.pill{background:#eef2fb;border-radius:20px;padding:3px 10px;font-size:12px;color:#3a4a72}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty .big{font-size:46px}

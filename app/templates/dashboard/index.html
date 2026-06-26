@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Tableau de bord{% endblock %}
+{% block content %}
+<div class="card" style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;flex-wrap:wrap;gap:12px;">
+  <div>
+    <h2 style="color:#0B2A6F;margin:0 0 4px;">Tableau de bord</h2>
+    <p style="color:#666;font-size:13px;margin:0;">Rapports automatisés — La Poste Tunisienne (National)</p>
+  </div>
+  <a href="{{ url_for('reports.new_report') }}" class="btn" style="font-size:15px;padding:12px 28px;">+ Nouveau rapport</a>
+</div>
+
+<div class="card">
+  <h3 style="color:#0B2A6F;margin-top:0;">Derniers jobs</h3>
+  {% if recent_jobs %}
+  <table>
+    <thead><tr><th>#</th><th>Statut</th><th>Régions</th><th>Tableaux</th><th>Créé le</th><th></th></tr></thead>
+    <tbody>
+    {% for job in recent_jobs %}
+      <tr>
+        <td><strong>#{{ job.id }}</strong></td>
+        <td><span class="badge {{ job.status }}">{{ job.status }}</span></td>
+        <td>{{ (job.params.regions or []) | length }} région(s)</td>
+        <td>
+          {% if job.params.include_depot %}<span style="background:#E4F0FF;color:#0B2A6F;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;margin-right:4px;">Dépôt</span>{% endif %}
+          {% if job.params.include_livraison %}<span style="background:#E4F7EC;color:#1A6B3A;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;">Livraison</span>{% endif %}
+        </td>
+        <td style="color:#666;font-size:12px;">{{ job.created_at.strftime('%d/%m/%Y %H:%M') if job.created_at }}</td>
+        <td><a href="{{ url_for('reports.job_status', job_id=job.id) }}" class="btn" style="padding:5px 14px;font-size:12px;">Détails</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color:#888;font-style:italic;">Aucun job lancé pour le moment.</p>
+  {% endif %}
+  <p style="margin-top:12px;margin-bottom:0;">
+    <a href="{{ url_for('reports.history') }}" style="color:#0B2A6F;font-size:13px;">Voir tout l'historique →</a>
+  </p>
+</div>
+{% endblock %}

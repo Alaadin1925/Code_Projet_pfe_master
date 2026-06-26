@@ -1,0 +1,28 @@
+# Keep the build context (and image) small + safe.
+.git
+.gitignore
+.venv
+venv
+env
+__pycache__
+*.pyc
+.pytest_cache
+.env
+*.db
+*.sqlite3
+reports/
+uploads/
+outputs/
+data/
+# Legacy / notebooks / large artifacts not used by the app
+powerbi_webapp/powerbi_profile/
+powerbi_profile/
+catboost_info/
+*.ipynb
+*.xlsx
+*.xls
+*.html
+*.png
+*.mp4
+*.pptx
+LkSystem_latex_Pfe/

@@ -1,0 +1,24 @@
+# ── Web framework ────────────────────────────────────────────────────────────
+Flask>=3.0,<4.0
+Flask-SQLAlchemy>=3.1
+Flask-Login>=0.6
+Flask-Migrate>=4.0
+Flask-WTF>=1.2            # CSRF protection + secure forms
+python-dotenv>=1.0        # load .env
+
+# ── Database ─────────────────────────────────────────────────────────────────
+SQLAlchemy>=2.0
+pyodbc>=5.1               # SQL Server driver (needs msodbcsql18 at runtime)
+
+# ── Data / Excel import ──────────────────────────────────────────────────────
+pandas>=2.2
+openpyxl>=3.1            # .xlsx reader
+xlrd>=2.0.1             # legacy .xls reader (import.xls)
+
+# ── Analytics / ML (clustering) ──────────────────────────────────────────────
+scikit-learn>=1.4
+scipy>=1.12
+numpy>=1.26
+
+# ── WSGI server (production) ─────────────────────────────────────────────────
+waitress>=3.0            # cross-platform WSGI server
