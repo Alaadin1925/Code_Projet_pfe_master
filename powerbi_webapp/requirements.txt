@@ -1,0 +1,12 @@
+flask
+flask-login
+flask-sqlalchemy
+waitress
+playwright
+pandas
+xlrd>=2.0.1
+openpyxl
+requests
+scikit-learn
+scipy
+numpy

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Job #{{ job.id }}{% endblock %}
+{% block content %}
+<div class="card">
+  <h2 style="color:#0B2A6F;margin-top:0;">
+    Job #{{ job.id }}
+    <span class="badge {{ job.status }}">{{ job.status }}</span>
+  </h2>
+  <p style="color:#666;font-size:13px;">
+    Régions : {{ job.regions | join(', ') }}<br>
+    Tableaux : {{ "Dépôt " if job.include_depot }}{{ "Livraison" if job.include_livraison }}<br>
+    Créé le : {{ job.created_at }}
+    {% if job.finished_at %}&mdash; Terminé le : {{ job.finished_at }}{% endif %}
+  </p>
+  {% if job.status == "done" %}
+    <p style="color:#1A6B3A;">✅ {{ job.success_count }}/{{ job.regions|length }} email(s) envoyé(s)</p>
+    {% if job.failed_regions %}
+      <p style="color:#B00020;">❌ Échecs : {{ job.failed_regions | join(', ') }}</p>
+    {% endif %}
+  {% endif %}
+  <h3 style="color:#0B2A6F;">Journal</h3>
+  <pre>{{ job.log_text or "(en attente de démarrage...)" }}</pre>
+  {% if job.status in ("pending", "running") %}
+    <script>setTimeout(() => location.reload(), 5000);</script>
+    <p style="color:#888;font-size:12px;">Cette page se rafraîchit automatiquement...</p>
+  {% endif %}
+</div>
+{% endblock %}

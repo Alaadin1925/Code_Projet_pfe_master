@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Flask / SQLite
+instance/
+*.db
+*.sqlite3
+
+# Données sensibles (fichiers Excel volumineux)
+*.xlsx
+*.xls
+*.csv
+
+# Rapports générés (HTML interactifs + captures)
+powerbi_webapp/reports/
+powerbi_automate_email/report_*.html
+powerbi_automate_email/report_*.png
+powerbi_automate_email/national_live.html
+powerbi_automate_email/powerbi_session.json
+
+# Browser profile Power BI (contient des cookies/sessions)
+powerbi_profile/
+**/powerbi_profile/
+
+# Logs TensorBoard / PyTorch Lightning
+lightning_logs/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Secrets
+.env
+*.pem
+*.key

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Historique{% endblock %}
+{% block content %}
+<div class="card">
+  <h2 style="color:#0B2A6F;margin-top:0;">Historique des jobs</h2>
+  <table>
+    <thead><tr><th>#</th><th>Utilisateur</th><th>Régions</th><th>Statut</th><th>Créé le</th><th></th></tr></thead>
+    <tbody>
+    {% for job in jobs %}
+      <tr>
+        <td>{{ job.id }}</td>
+        <td>{{ job.user.username }}</td>
+        <td>{{ job.regions | join(', ') }}</td>
+        <td><span class="badge {{ job.status }}">{{ job.status }}</span></td>
+        <td>{{ job.created_at }}</td>
+        <td><a class="btn" href="{{ url_for('job_status', job_id=job.id) }}">Voir</a></td>
+      </tr>
+    {% else %}
+      <tr><td colspan="6">Aucun job pour le moment.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
