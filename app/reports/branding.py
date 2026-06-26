@@ -1,0 +1,5 @@
+"""La Poste Tunisienne report brand colors (shared by the HTML builders)."""
+C_NAVY = "#0B2A6F"
+C_YELLOW = "#F4C20D"
+C_BG = "#F7F9FC"
+C_LIGHT = "#EEF4FF"

@@ -10,10 +10,11 @@ __pycache__
 .env
 *.db
 *.sqlite3
-reports/
-uploads/
-outputs/
-data/
+# Root output dirs only (leading slash) — keep app/reports & app/templates/reports
+/reports/
+/uploads/
+/outputs/
+/data/
 # Legacy / notebooks / large artifacts not used by the app
 powerbi_webapp/powerbi_profile/
 powerbi_profile/

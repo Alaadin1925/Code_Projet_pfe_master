@@ -29,11 +29,12 @@ ENV/
 local_dev.db
 instance/
 
-# ── Generated reports / uploads / temp ───────────────────────────────────────
-reports/
-uploads/
-outputs/
-tmp/
+# ── Generated reports / uploads / temp (ROOT output dirs only — leading slash
+#    so the source packages app/reports/ and app/templates/reports/ are kept) ──
+/reports/
+/uploads/
+/outputs/
+/tmp/
 *.tmp
 *.log
 

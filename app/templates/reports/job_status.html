@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Job #{{ job.id }}{% endblock %}
+{% block content %}
+<div class="card">
+  <h2 style="color:#0B2A6F;margin-top:0;">
+    Job #{{ job.id }} <span class="badge {{ job.status }}">{{ job.status }}</span>
+  </h2>
+  <p style="color:#666;font-size:13px;">
+    Régions : {{ (job.params.regions or ['(national)']) | join(', ') }}<br>
+    Tableaux : {{ "Dépôt " if job.params.include_depot }}{{ "Livraison" if job.params.include_livraison }}<br>
+    Créé le : {{ job.created_at.strftime('%d/%m/%Y %H:%M') if job.created_at }}
+    {% if job.finished_at %}&mdash; Terminé le : {{ job.finished_at.strftime('%d/%m/%Y %H:%M') }}{% endif %}
+  </p>
+  {% if job.status == "done" %}
+    <p style="color:#1A6B3A;">✅ {{ job.success_count }} rapport(s) généré(s)</p>
+  {% elif job.status == "failed" and job.error_message %}
+    <p style="color:#B00020;">❌ {{ job.error_message }}</p>
+  {% endif %}
+
+  {% if job.reports %}
+  <h3 style="color:#0B2A6F;">Rapports</h3>
+  <table>
+    <thead><tr><th>Région</th><th>Fichier</th><th>Email</th><th></th></tr></thead>
+    <tbody>
+    {% for r in job.reports %}
+      <tr>
+        <td>{{ r.region or '(national)' }}</td>
+        <td>{{ r.file_name }}</td>
+        <td>{{ r.emailed_to or '—' }}</td>
+        <td><a class="btn" style="padding:5px 14px;font-size:12px;"
+               href="{{ url_for('reports.download', filename=r.file_name) }}" target="_blank">Ouvrir</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  <h3 style="color:#0B2A6F;">Journal</h3>
+  <pre>{{ job.log_text or "(en attente de démarrage...)" }}</pre>
+  {% if job.status in ("pending", "running") %}
+    <script>setTimeout(function(){ location.reload(); }, 5000);</script>
+    <p style="color:#888;font-size:12px;">Cette page se rafraîchit automatiquement...</p>
+  {% endif %}
+</div>
+{% endblock %}
